@@ -1,5 +1,3 @@
----
-page_type: sample
 languages: Shell Script, Bicep, Yaml, Python, Json
 products: Github, Azure Devops, Azure, Azure Data Lake Gen2, Azure Data Factory
 description: "Code samples showcasing how to leverage DataOps using Azure Data Factory and Azure DevOps"
