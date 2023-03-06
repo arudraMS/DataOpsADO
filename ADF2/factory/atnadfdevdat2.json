@@ -1,9 +1,0 @@
-{
-	"name": "atnadfdevdat2",
-	"location": "eastus",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "318365af-4380-42b3-aade-ce04898653eb",
-		"tenantId": "16b3c013-d300-468d-ac64-7eda0820b6d3"
-	}
-}
