@@ -2,8 +2,7 @@
 page_type: sample
 languages: Shell Script, Bicep, Yaml, Python, Json
 products: Github, Azure Devops, Azure, Azure Data Lake Gen2, Azure Data Factory
-description: "Code samples showcasing how to leverage DataOps using Azure Data Factory and Azure DevOps
----
+description: "Code samples showcasing how to leverage DataOps using Azure Data Factory and Azure DevOps"
 
 This repository contains code samples and artifacts on how to apply DevOps principles to Infra and Data pipelines according to the following diagram.
 
