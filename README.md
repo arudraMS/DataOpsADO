@@ -21,11 +21,6 @@ Github Infra Action
     * Azure Data Factory
 - to associate the Dev data factory with Azure DevOps Repository
 
-Session 2 (DataOps):
-- Building a small data pipeline using Azure 
-- Triggering ADO Pipelines to deploy changes from ADF Dev to ADF Production Data Pipeline, followed by triggering ADF production pipeline, producing fresh data
-
-
 A.	Prerequsites in Azure:
 	- Existence of Azure Subscription & Resource Groups (Here we have chosen two resource groups one for dev environment and one for prod environment)
 	- Portal/ CLI level Admin (Owner) Access to above two environments for creating two service principals, one for dev and one for prod
@@ -61,7 +56,8 @@ A.	Prerequsites in Azure:
 	  "galleryEndpointUrl": "https://gallery.azure.com/",
 	  "managementEndpointUrl": "https://management.core.windows.net/"
 	}
-	
+
+
 B. Prequisites in GITHUB
 	- Go to Settings-Environments
 	- Create an environment called "Dev"
@@ -102,36 +98,7 @@ B. Prequisites in GITHUB
 	
 	- Create github action infra workflow to create the above resources for Dev & Prod by calling the following bicep template
 	- Create bicep file for creating a)keyvault, b)storage, c)adf in both dev and prood environment and associat dev adf with git parameters
-	- Create github actions (yaml) in adf_publish branch of github repo for kicking of build and release pipelines for ADF
-	
-	
-		steps:
-        - name: Azure PowerShell script: Stop ADF triggers
-		  uses: azure/AzurePowerShell@4
-		  azurePowerShellVersion: LatestVersion
-          with:
-            subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
-			resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
-			template: ${{ github.workspace }}/${{ env.AZURE_DEV_DF_NAME }}/deploymentadf.ps1            
-            parameters: '-armTemplate ${{ github.workspace }}/${{ env.AZURE_DEV_DF_NAME }}/ARMTemplateForFactory.json -ResourceGroupName ${{ env.AZURE_RESOURCE_GROUP }} -DataFactoryName ${{ env.AZURE_DEV_DF_NAME }} -predeployment true
-	
-	
-		- name: Deploy ARM Template
-		  uses: azure/arm-deploy@v1
-		  with:
-			subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
-			resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
-			template: ${{ github.workspace }}/${{ env.AZURE_DEV_DF_NAME }}/ARMTemplateForFactory.json             
-			parameters: ${{ github.workspace }}/${{ env.AZURE_DEV_DF_NAME }}/ARMTemplateParametersForFactory.json 
-						factoryName=${{ env.AZURE_PRD_DF_NAME }} 
-						AzureKeyVault1_properties_typeProperties_baseUrl="https://mdwdopskvproddat2.vault.azure.net/"
-						AzureDataLakeStorage1_properties_typeProperties_url="https://mdwdopsstrgproddat2.dfs.core.windows.net/"
-						RestService1_properties_typeProperties_url="https://api.spacexdata.com/v3/"
 
-C.	Open Dev Data Factory - Create pipeline, Linked service using secrets, datasets, copy activity
-	- Once Dev Data Factory is saved the following things happen
-		* The data factory gets saved in the Git Repo Folder of the main branch
-	- Once Dev Data Factory is published the following things happen
-		* The data factory gets published in adf_publish branch under  
-		* The data factory gets unit tested
-		* if the unit testing passes, adf code gets moved to production data factory
+Session 2 (DataOps):
+- Building a small data pipeline using Dev Azure Data Factory
+- Triggering ADO CICD pipeline
