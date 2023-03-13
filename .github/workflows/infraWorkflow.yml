@@ -22,7 +22,7 @@ jobs:
         subscriptionId: ${{ vars.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ vars.AZURE_RG }}
         template: infrastructure/inframain.bicep
-        parameters: 'environment="development" keyVaultName=${{ vars.AZURE_KEYVAULT }} spnClientID=${{ secrets.AZURE_CLIENT_ID1 }} userObjectID=${{ secrets.AZURE_CLIENT_ID2 }} dataFactoryName=${{ vars.AZURE_DATA_FACTORY }} storageSKU=${{ vars.AZURE_STORAGE_SKU }} storageAccountName=${{ vars.AZURE_STORAGE_ACCOUNT }} deployStorage=${{ vars.DEPLOY_STORAGE }} deployADF=${{ vars.DEPLOY_ADF }} gitType=${{ vars.GIT_TYPE }} gitAccount=${{ vars.GIT_ACCOUNT }} gitProject=${{ vars.GIT_PROJECT }} gitRepo=${{ vars.GIT_REPO }} gitCollab=${{ vars.GIT_COLLAB_BRANCH }} gitFolder=${{ vars.GIT_FOLDER }}'
+        parameters: 'environment="development" keyVaultName=${{ vars.AZURE_KEYVAULT }} spnClientID=${{ secrets.AZURE_CLIENT_ID1 }} userObjectID=${{ secrets.AZURE_CLIENT_ID2 }} dataFactoryName=${{ vars.AZURE_DATA_FACTORY }} storageSKU=${{ vars.AZURE_STORAGE_SKU }} storageAccountName=${{ vars.AZURE_STORAGE_ACCOUNT }} deployStorage=${{ vars.DEPLOY_STORAGE }} deployADF=${{ vars.DEPLOY_ADF }} gitType=${{ vars.GIT_TYPE }} gitAccount=${{ vars.GIT_ACCOUNT }} gitProject=${{ vars.GIT_PROJECT }} gitRepo=${{ vars.GIT_REPO }} gitCollab=${{ vars.GIT_COLLAB_BRANCH }} gitFolder=${{ vars.GIT_FOLDER }} databricksWorkspaceName=${{ vars.ADB_WRKSPC }}'
         failOnStdErr: false
   
   build-prod-environment:
@@ -44,6 +44,6 @@ jobs:
         subscriptionId: ${{ vars.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ vars.AZURE_RG }}
         template: infrastructure/inframain.bicep
-        parameters: 'environment="production" keyVaultName=${{ vars.AZURE_KEYVAULT }} spnClientID=${{ secrets.AZURE_CLIENT_ID1 }} userObjectID=${{ secrets.AZURE_CLIENT_ID2 }} dataFactoryName=${{ vars.AZURE_DATA_FACTORY }} storageSKU=${{ vars.AZURE_STORAGE_SKU }} storageAccountName=${{ vars.AZURE_STORAGE_ACCOUNT }} deployStorage=${{ vars.DEPLOY_STORAGE }} deployADF=${{ vars.DEPLOY_ADF }}'
+        parameters: 'environment="production" keyVaultName=${{ vars.AZURE_KEYVAULT }} spnClientID=${{ secrets.AZURE_CLIENT_ID1 }} userObjectID=${{ secrets.AZURE_CLIENT_ID2 }} dataFactoryName=${{ vars.AZURE_DATA_FACTORY }} storageSKU=${{ vars.AZURE_STORAGE_SKU }} storageAccountName=${{ vars.AZURE_STORAGE_ACCOUNT }} deployStorage=${{ vars.DEPLOY_STORAGE }} deployADF=${{ vars.DEPLOY_ADF }} databricksWorkspaceName=${{ vars.ADB_WRKSPC }}'
         failOnStdErr: false
         
