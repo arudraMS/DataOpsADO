@@ -50,6 +50,13 @@ param gitCollab string = ' '
 @description('Name of the Git Root Folder.')
 param gitFolder string = ' '
 
+@description('Name of the Databricks workspace.')
+param databricksWorkspaceName string
+
+@description('Location of the Databricks workspace.')
+param databricksWorkspaceLocation string = resourceGroup().location
+
+
 var azDevopsRepoConfiguration = {
   accountName: gitAccount
   repositoryName: gitRepo
@@ -151,5 +158,22 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
           }
       }
     ]
+  }
+}
+
+
+resource databricksWorkspace 'Microsoft.Databricks/workspaces@2021-05-01-preview' = {
+  name: databricksWorkspaceName
+  location: databricksWorkspaceLocation
+  properties: {
+    managedResourceGroupName: resourceGroup().name
+    parameters: {
+      publicIpVisibility: 'PublicEndpoint'
+      managedResourceGroupId: resourceGroup().id
+    }
+    sku: {
+      name: 'standard'
+      tier: 'standard'
+    }
   }
 }
