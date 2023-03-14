@@ -161,23 +161,26 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   }
 }
 
-
-resource databricksWorkspace 'Microsoft.Databricks/workspaces@2021-04-01' = {
+resource databricks 'Microsoft.Databricks/workspaces@2018-04-01' = {
   name: databricksWorkspaceName
   location: databricksWorkspaceLocation
+  tags: {
+    DisplayName: 'Databricks Workspace'
+  }
   sku: {
     name: 'standard'
   }
   properties: {
-    managedResourceGroupName: resourceGroup().name
-    parameters: {
-      customParameters: {}
-      encryption: {
-        enabled: true
-      }
-      publicNetworkAccess: {
-        enabled: true
-      }
-    }
+    managedResourceGroupId: subscriptionResourceId('Microsoft.Resources/resourceGroups', resourceGroup().name)
+  }
+}
+
+resource databricks_roleassignment 'Microsoft.Authorization/roleAssignments@2020-08-01-preview' = {
+  name: guid(databricks.id)
+  scope: databricks
+  properties: {
+    roleDefinitionId: contributor
+    principalId: spnClientID
+    principalType: 'ServicePrincipal'
   }
 }
