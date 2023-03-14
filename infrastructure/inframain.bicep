@@ -164,7 +164,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
 
 resource databricksWorkspace 'Microsoft.Databricks/workspaces@2021-04-01' = {
   name: databricksWorkspaceName
-  location: location
+  location: databricksWorkspaceLocation
   sku: {
     name: 'standard'
   }
@@ -176,7 +176,7 @@ resource databricksWorkspace 'Microsoft.Databricks/workspaces@2021-04-01' = {
         enabled: true
       }
       publicNetworkAccess: {
-        enabled: false
+        enabled: true
       }
     }
   }
