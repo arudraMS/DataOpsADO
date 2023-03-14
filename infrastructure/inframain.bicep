@@ -161,6 +161,9 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   }
 }
 
+//https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+var contributor = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b24988ac-6180-42a0-ab88-20f7382dd24c')
+
 resource databricks 'Microsoft.Databricks/workspaces@2018-04-01' = {
   name: databricksWorkspaceName
   location: databricksWorkspaceLocation
