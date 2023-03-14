@@ -162,18 +162,22 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
 }
 
 
-resource databricksWorkspace 'Microsoft.Databricks/workspaces@2021-05-01-preview' = {
+resource databricksWorkspace 'Microsoft.Databricks/workspaces@2021-04-01' = {
   name: databricksWorkspaceName
-  location: databricksWorkspaceLocation
+  location: location
+  sku: {
+    name: 'standard'
+  }
   properties: {
     managedResourceGroupName: resourceGroup().name
     parameters: {
-      publicIpVisibility: 'PublicEndpoint'
-      managedResourceGroupId: resourceGroup().id
-    }
-    sku: {
-      name: 'standard'
-      tier: 'standard'
+      customParameters: {}
+      encryption: {
+        enabled: true
+      }
+      publicNetworkAccess: {
+        enabled: false
+      }
     }
   }
 }
